@@ -308,6 +308,17 @@ class Tester
     }
 
     /**
+     * @param callable $callable
+     * @return $this
+     */
+    public function transform(callable $callable)
+    {
+        $this->data = call_user_func($callable, $this->getData());
+
+        return $this;
+    }
+
+    /**
      * @param $path
      * @param string $message
      * @return $this

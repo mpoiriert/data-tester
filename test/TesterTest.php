@@ -158,4 +158,22 @@ class TesterTest extends TestCase
 
         $this->assertSame(count($users), $callbackCount);
     }
+
+    public function testTransform()
+    {
+        $callbackCount = 0;
+
+        (new Tester('{"key":"value"}'))
+            ->assertJson()
+            ->transform('json_decode')
+            ->path(
+                'key',
+                function (Tester $tester) use (&$callbackCount) {
+                    $callbackCount++;
+                    $tester->assertEquals('value');
+                }
+            );
+
+        $this->assertSame(1, $callbackCount);
+    }
 }
