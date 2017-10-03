@@ -6,5 +6,17 @@ php:
   - 7.1
   - 7.2
 
+env:
+  - PHP_UNIT_VERSION="5.0.*"
+  - PHP_UNIT_VERSION="6.0.*"
+
+matrix:
+  exclude:
+  - env: PHP_UNIT_VERSION="6.0.*"
+    php: 5.4
+  - env: PHP_UNIT_VERSION="6.0.*"
+    php: 5.6
+
+
 before_script:
   - composer install --dev
