@@ -329,14 +329,12 @@ class Tester
      */
     public function assertPathIsReadable($path, $message = null)
     {
-        static::invokeAssert(
-            'assertTrue',
-            [
-                $this->isReadable($path),
-                $message ?:
-                    "Property path is not readable.\nProperty path: " . $path . "\nData:\n" .
-                    json_encode($this->data, JSON_PRETTY_PRINT) . "\nBe careful for assoc array and object"
-            ]
+        TestCase::assertTrue(
+            $this->isReadable($path),
+            $message ?:
+                "Property path is not readable.\nProperty path: " . $path . "\nData:\n" .
+                json_encode($this->data, JSON_PRETTY_PRINT) . "\nBe careful for assoc array and object"
+
         );
 
         return $this;
@@ -344,14 +342,11 @@ class Tester
 
     public function assertPathIsNotReadable($path, $message = null)
     {
-        static::invokeAssert(
-            'assertFalse',
-            [
-                $this->isReadable($path),
-                $message ?:
-                    "Property path is readable.\nProperty path: " . $path . "\nData:\n" .
-                    json_encode($this->data, JSON_PRETTY_PRINT) . "\nBe careful for assoc array and object"
-            ]
+        TestCase::assertFalse(
+            $this->isReadable($path),
+            $message ?:
+                "Property path is readable.\nProperty path: " . $path . "\nData:\n" .
+                json_encode($this->data, JSON_PRETTY_PRINT) . "\nBe careful for assoc array and object"
         );
 
         return $this;
@@ -388,28 +383,9 @@ class Tester
     private static function getAssertReflectionClass()
     {
         if (is_null(static::$assertReflectionClass)) {
-            $className = null;
-            switch (true) {
-                case class_exists('PHPUnit_Framework_Assert', true):
-                    $className = 'PHPUnit_Framework_Assert';
-                    break;
-                case class_exists('PHPUnit\Framework\Assert', true):
-                    $className = 'PHPUnit\Framework\Assert';
-                    break;
-            }
-
-            if (is_null($className)) {
-                throw new \RuntimeException('No compatible PHPUnit Assert class found');
-            }
-
-            static::$assertReflectionClass = new \ReflectionClass($className);
+            static::$assertReflectionClass = new \ReflectionClass(TestCase::class);
         }
 
         return static::$assertReflectionClass;
-    }
-
-    private static function invokeAssert($method, $arguments)
-    {
-        return static::getAssertReflectionClass()->getMethod($method)->invokeArgs(null, $arguments);
     }
 }

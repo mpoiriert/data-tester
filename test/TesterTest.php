@@ -2,8 +2,6 @@
 
 namespace Draw\DataTester;
 
-use PHPUnit\Framework\TestCase;
-
 class TesterTest extends TestCase
 {
     public function testAssertPathIsNotReadable()
