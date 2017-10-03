@@ -2,7 +2,6 @@
 
 namespace Draw\DataTester;
 
-use PHPUnit\Framework\Assert;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
@@ -211,6 +210,11 @@ class Tester
     static private $propertyAccessor;
 
     /**
+     * @var \ReflectionClass
+     */
+    static private $assertReflectionClass;
+
+    /**
      * A private static property accessor so we do not need to initialize it more than once
      *
      * @return \Symfony\Component\PropertyAccess\PropertyAccessorInterface
@@ -325,11 +329,14 @@ class Tester
      */
     public function assertPathIsReadable($path, $message = null)
     {
-        Assert::assertTrue(
-            $this->isReadable($path),
-            $message ?:
-                "Property path is not readable.\nProperty path: " . $path . "\nData:\n" .
-                json_encode($this->data, JSON_PRETTY_PRINT) . "\nBe careful for assoc array and object"
+        static::invokeAssert(
+            'assertTrue',
+            [
+                $this->isReadable($path),
+                $message ?:
+                    "Property path is not readable.\nProperty path: " . $path . "\nData:\n" .
+                    json_encode($this->data, JSON_PRETTY_PRINT) . "\nBe careful for assoc array and object"
+            ]
         );
 
         return $this;
@@ -337,11 +344,14 @@ class Tester
 
     public function assertPathIsNotReadable($path, $message = null)
     {
-        Assert::assertFalse(
-            $this->isReadable($path),
-            $message ?:
-                "Property path is readable.\nProperty path: " . $path . "\nData:\n" .
-                json_encode($this->data, JSON_PRETTY_PRINT) . "\nBe careful for assoc array and object"
+        static::invokeAssert(
+            'assertFalse',
+            [
+                $this->isReadable($path),
+                $message ?:
+                    "Property path is readable.\nProperty path: " . $path . "\nData:\n" .
+                    json_encode($this->data, JSON_PRETTY_PRINT) . "\nBe careful for assoc array and object"
+            ]
         );
 
         return $this;
@@ -355,7 +365,7 @@ class Tester
      */
     public function __call($method, $arguments = array())
     {
-        $reflectionMethod = new \ReflectionMethod(Assert::class, $method);
+        $reflectionMethod = static::getAssertReflectionClass()->getMethod($method);
         $parameterName = self::$assertMethodParameterReplacements[$method];
         $position = null;
         //The argument is of the data is not always at the same position in the method so we need to find it
@@ -367,8 +377,39 @@ class Tester
         }
 
         array_splice($arguments, $position, 0, array($this->data));
-        call_user_func_array([Assert::class, $method], $arguments);
+        $reflectionMethod->invokeArgs(null, $arguments);
 
         return $this;
+    }
+
+    /**
+     * @return \ReflectionClass
+     */
+    private static function getAssertReflectionClass()
+    {
+        if (is_null(static::$assertReflectionClass)) {
+            $className = null;
+            switch (true) {
+                case class_exists('PHPUnit_Framework_Assert', true):
+                    $className = 'PHPUnit_Framework_Assert';
+                    break;
+                case class_exists('PHPUnit\Framework\Assert', true):
+                    $className = 'PHPUnit\Framework\Assert';
+                    break;
+            }
+
+            if (is_null($className)) {
+                throw new \RuntimeException('No compatible PHPUnit Assert class found');
+            }
+
+            static::$assertReflectionClass = new \ReflectionClass($className);
+        }
+
+        return static::$assertReflectionClass;
+    }
+
+    private static function invokeAssert($method, $arguments)
+    {
+        return static::getAssertReflectionClass()->getMethod($method)->invokeArgs(null, $arguments);
     }
 }
