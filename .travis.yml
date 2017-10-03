@@ -13,9 +13,9 @@ env:
 
 matrix:
   exclude:
-  - env: PHP_UNIT_VERSION="6.0.*"
+  - env: PHP_UNIT_VERSION="6.*"
     php: 5.4
-  - env: PHP_UNIT_VERSION="6.0.*"
+  - env: PHP_UNIT_VERSION="6.*"
     php: 5.6
 
 
