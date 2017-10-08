@@ -14,6 +14,7 @@ class TesterTest extends TestCase
         );
     }
 
+
     public function testAssertPathIsReadable()
     {
         $tester = new Tester((object)["key" => "value"]);
@@ -163,12 +164,15 @@ class TesterTest extends TestCase
 
         (new Tester('{"key":"value"}'))
             ->assertJson()
-            ->transform('json_decode')
-            ->path(
-                'key',
+            ->transform('json_decode',
                 function (Tester $tester) use (&$callbackCount) {
-                    $callbackCount++;
-                    $tester->assertEquals('value');
+                    $tester->path(
+                        'key',
+                        function (Tester $tester) use (&$callbackCount) {
+                            $callbackCount++;
+                            $tester->assertEquals('value');
+                        }
+                    );
                 }
             );
 

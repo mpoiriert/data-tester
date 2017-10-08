@@ -312,12 +312,19 @@ class Tester
     }
 
     /**
-     * @param callable $callable
+     * @param callable $transformCallable The callable that will transform the data
+     * @param callable $callable The callable that will be call with the new tester
      * @return $this
      */
-    public function transform(callable $callable)
+    public function transform(callable $transformCallable, callable $callable)
     {
-        $this->data = call_user_func($callable, $this->getData());
+        call_user_func(
+            $transformCallable,
+            call_user_func(
+                $callable,
+                new static(call_user_func($transformCallable, $this->getData()))
+            )
+        );
 
         return $this;
     }
@@ -340,6 +347,11 @@ class Tester
         return $this;
     }
 
+    /**
+     * @param $path
+     * @param null $message
+     * @return $this
+     */
     public function assertPathIsNotReadable($path, $message = null)
     {
         TestCase::assertFalse(
