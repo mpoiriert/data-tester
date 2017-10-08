@@ -1,10 +1,9 @@
 <?php
-
 //example-start: TestClass
 namespace Your\Project\Name;
 
+use Draw\DataTester\TestCase;
 use Draw\DataTester\Tester;
-use PHPUnit\Framework\TestCase;
 
 class ExampleTest extends TestCase
 {
