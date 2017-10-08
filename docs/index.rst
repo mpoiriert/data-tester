@@ -1,19 +1,9 @@
 Php Data Tester
 ===============
 
-
+.. image:: https://travis-ci.org/mpoiriert/php-data-tester.svg?branch=master
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
    getting_started
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
