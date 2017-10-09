@@ -6,7 +6,7 @@ the first argument for the transformation and another **callable** for the test 
 Let's you have a **json** string as *data*, that you want to test the content, it will look like this:
 
 .. literalinclude:: ../../test/ExampleTest.php
-   :name: Example-Transform
+   :name: example-transform
    :caption: Example: Transform
    :emphasize-lines: 2
    :start-after: //example-start: Transform
@@ -17,7 +17,7 @@ Let's you have a **json** string as *data*, that you want to test the content, i
 Ideally you should **test** your *data* before transforming it:
 
 .. literalinclude:: ../../test/ExampleTest.php
-   :name: Example-Assert-Before-Transform
+   :name: example-assert-before-transform
    :caption: Example: Assert Before Transform
    :emphasize-lines: 2
    :start-after: //example-start: AssertTransform
@@ -30,12 +30,12 @@ create a custom callable with the appropriate option. Let say you want **json_de
 array:
 
 .. literalinclude:: ../../test/ExampleTest.php
-   :name: Example-Assert-Before-Transform-Custom
-   :caption: Example: Assert Before Transform-Custom
+   :name: example-assert-before-transform-custom
+   :caption: Example: Assert Before Transform-custom
    :emphasize-lines: 4-6,8
    :start-after: //example-start: AssertTransformCustom
    :end-before: //example-end: AssertTransformCustom
    :dedent: 8
    :prepend: <?php
 
-Take a not that since it's a associative array the path must be change from **key** to **[key]**.
+Take a note that since it's a associative array the path must be change from **key** to **[key]**.

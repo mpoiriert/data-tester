@@ -6,8 +6,8 @@ You have a method that return you a user and one that return you a list of users
 You can simply create a class that as all the test inside of it.
 
 .. literalinclude:: ../../test/ExampleTest.php
-   :name: Advance-Example-Class-Callable
-   :caption: Advance Example: Class Callable
+   :name: example-class-callable
+   :caption: Example: Class Callable
    :start-after: //example-start: UserDataTester
    :end-before: //example-end: UserDataTester
    :prepend: <?php\nnamespace Your\Project\Name;\nuse Draw\DataTester\Tester;
@@ -15,8 +15,8 @@ You can simply create a class that as all the test inside of it.
 And now you can use it to test the *data* of one user:
 
 .. literalinclude:: ../../test/ExampleTest.php
-   :name: advance-example-test-with-class-callable
-   :caption: Advance Example: Test With Class Callable
+   :name: example-test-with-class-callable
+   :caption: Example: Test With Class Callable
    :emphasize-lines: 8
    :start-after: //example-start: TestWithClassCallable
    :end-before: //example-end: TestWithClassCallable
@@ -26,8 +26,8 @@ And now you can use it to test the *data* of one user:
 Or with **each** in case of a list of users:
 
 .. literalinclude:: ../../test/ExampleTest.php
-   :name: advance-example-each-with-class-callable
-   :caption: Advance Example: Each With Class Callable
+   :name: example-each-with-class-callable
+   :caption: Example: Each With Class Callable
    :emphasize-lines: 10
    :start-after: //example-start: EachWithClassCallableEach
    :end-before: //example-end: EachWithClassCallableEach

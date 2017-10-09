@@ -1,7 +1,7 @@
 Advance
 =======
 
-Here is a list of advance example that you can follow to make your test more maintainable.
+Here is a list of advance examples that you can follow to make your test more efficient and maintainable.
 
 .. toctree::
    :maxdepth: 1

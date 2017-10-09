@@ -5,7 +5,7 @@ Considering you have a complex structure with optional **path** into it. You can
 to make some test **optional**:
 
 .. literalinclude:: ../../test/ExampleTest.php
-   :name: Example-If-Path-Is-Readable
+   :name: example-if-path-is-readable
    :caption: Example: If Path Is Readable
    :emphasize-lines: 3
    :start-after: //example-start: IfPathIsReadable
@@ -17,7 +17,7 @@ This obviously make more sense with a combination of **each**. In this more comp
 a list of users object that don't have the same properties available:
 
 .. literalinclude:: ../../test/ExampleTest.php
-   :name: Example-If-Path-Is-Readable-And-Each
+   :name: example-if-path-is-readable-and-each
    :caption: Example If Path Is Readable And Each
    :emphasize-lines: 6,29
    :start-after: //example-start: IfPathIsReadableAndEach
