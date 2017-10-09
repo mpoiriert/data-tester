@@ -8,7 +8,7 @@ Let's you have a **json** string as *data*, that you want to test the content, i
 .. literalinclude:: ../../test/ExampleTest.php
    :name: example-transform
    :caption: Example: Transform
-   :emphasize-lines: 2
+   :emphasize-lines: 3
    :start-after: //example-start: Transform
    :end-before: //example-end: Transform
    :dedent: 8
@@ -19,7 +19,7 @@ Ideally you should **test** your *data* before transforming it:
 .. literalinclude:: ../../test/ExampleTest.php
    :name: example-assert-before-transform
    :caption: Example: Assert Before Transform
-   :emphasize-lines: 2
+   :emphasize-lines: 3
    :start-after: //example-start: AssertTransform
    :end-before: //example-end: AssertTransform
    :dedent: 8
@@ -32,7 +32,7 @@ array:
 .. literalinclude:: ../../test/ExampleTest.php
    :name: example-assert-before-transform-custom
    :caption: Example: Assert Before Transform-custom
-   :emphasize-lines: 4-6,8
+   :emphasize-lines: 5-7,9
    :start-after: //example-start: AssertTransformCustom
    :end-before: //example-end: AssertTransformCustom
    :dedent: 8
