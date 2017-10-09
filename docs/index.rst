@@ -4,6 +4,7 @@ Php Data Tester
 .. image:: https://travis-ci.org/mpoiriert/php-data-tester.svg?branch=master
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
-   getting_started
+   getting-started/index
+   advance/index

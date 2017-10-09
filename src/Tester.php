@@ -365,6 +365,19 @@ class Tester
     }
 
     /**
+     * Execute the callable with $this as the parameters.
+     * Useful to create reusable test.
+     *
+     * @param callable $callable
+     * @return $this
+     */
+    public function test(callable $callable)
+    {
+        call_user_func($callable, $this);
+        return $this;
+    }
+
+    /**
      * @param $method
      * @param array $arguments
      *

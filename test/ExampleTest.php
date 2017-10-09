@@ -19,16 +19,16 @@ class ExampleTest extends TestCase
 
 //example-end: TestClass
 
-    public function conciseNewTest()
+    public function testConciseNew()
     {
         //example-start: ConciseNew
         (new Tester('A string value'))
-            ->assertInternalType('array')
+            ->assertInternalType('string')
             ->assertSame('A string value');
         //example-end: ConciseNew
     }
 
-    public function pathTest()
+    public function testPath()
     {
         //example-start: TestPath
         (new Tester((object)["key" => "value"]))
@@ -40,7 +40,7 @@ class ExampleTest extends TestCase
         //example-end: TestPath
     }
 
-    public function chainPathTest()
+    public function testChainPath()
     {
         //example-start: ChainTestPath
         (new Tester((object)["key1" => "value1", "key2" => "value2"]))
@@ -57,7 +57,7 @@ class ExampleTest extends TestCase
         //example-end: ChainTestPath
     }
 
-    public function deeperPathTest()
+    public function testDeeperPath()
     {
         //example-start: DeeperPathTest
         (new Tester((object)["level1" => (object)["level2" => "value"]]))
@@ -73,7 +73,7 @@ class ExampleTest extends TestCase
         //example-end: DeeperPathTest
     }
 
-    public function eachTest()
+    public function testEach()
     {
         //example-start: EachTest
         (new Tester(['value1', 'value2']))
@@ -85,7 +85,7 @@ class ExampleTest extends TestCase
         //example-end: EachTest
     }
 
-    public function transformTest()
+    public function testTransform()
     {
         //example-start: Transform
         (new Tester('{"key":"value"}'))
@@ -101,7 +101,7 @@ class ExampleTest extends TestCase
         //example-end: Transform
     }
 
-    public function transformAssertTest()
+    public function testTransformAssert()
     {
         //example-start: AssertTransform
         (new Tester('{"key":"value"}'))
@@ -116,6 +116,26 @@ class ExampleTest extends TestCase
                 }
             );
         //example-end: AssertTransform
+    }
+
+    public function testTransformAssertCustom()
+    {
+        //example-start: AssertTransformCustom
+        (new Tester('{"key":"value"}'))
+            ->assertJson()
+            ->transform(
+                function($data) {
+                    return json_decode($data, true);
+                },
+                function (Tester $tester) {
+                    $tester->path('[key]',
+                        function (Tester $tester) {
+                            $tester->assertSame('value');
+                        }
+                    );
+                }
+            );
+        //example-end: AssertTransformCustom
     }
 
     public function testIfPathIsReadable()
@@ -172,4 +192,66 @@ class ExampleTest extends TestCase
             );
         //example-end: IfPathIsReadableAndEach
     }
+
+    public function testUser()
+    {
+        //example-start: TestWithClassCallable
+        $user = (object)[
+            'firstName' => 'Martin',
+            'active' => true,
+            'referral' => 'Google'
+        ];
+
+        (new Tester($user))
+            ->test(new UserDataTester());
+        //example-end: TestWithClassCallable
+    }
+
+    public function testUsers()
+    {
+        //example-start: EachWithClassCallableEach
+        $users = [
+            (object)[
+                'firstName' => 'Martin',
+                'active' => true,
+                'referral' => 'Google'
+            ],
+            (object)[
+                'firstName' => 'Julie',
+                'active' => false
+            ]
+        ];
+
+        (new Tester($users))
+            ->each(new UserDataTester());
+        //example-end: EachWithClassCallableEach
+    }
 }
+
+//example-start: UserDataTester
+class UserDataTester
+{
+    public function __invoke(Tester $tester)
+    {
+        $tester
+            ->path(
+                'firstName',
+                function (Tester $tester) {
+                    $tester->assertInternalType('string');
+                }
+            )
+            ->path(
+                'active',
+                function (Tester $tester) {
+                    $tester->assertInternalType('boolean');
+                }
+            )
+            ->ifPathIsReadable(
+                'referral',
+                function (Tester $tester) {
+                    $tester->assertInternalType('string');
+                }
+            );
+    }
+}
+//example-end: UserDataTester
