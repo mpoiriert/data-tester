@@ -5,7 +5,7 @@ php:
   - 7.2
 
 env:
-  - PHP_UNIT_VERSION="5.0"
+  - PHP_UNIT_VERSION="5.7"
   - PHP_UNIT_VERSION="6.0"
 
 matrix:
