@@ -10,10 +10,6 @@ From a PHPUnit test case you simply create a new **Draw\\DataTester\\Tester** in
    :prepend: <?php
    :append: }
 
-Extending from **Draw\\DataTester\\TestCase** allow your **TestCase** to be compatible with older version of PHPUnit
-that doesn't use namespace. Since this project is compatible with PHPUnit 4.0 and 5.0 it is necessary. You can
-simply extend from **PHPUnit\\Framework\\TestCase** or **PHPUnit_Framework_TestCase** if you want.
-
 The **Tester** use a fluent interface by returning himself on all of the **assert\*** methods and most of his methods.
 This allow to easily make multiple test on the same *data*.
 
