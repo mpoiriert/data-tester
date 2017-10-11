@@ -2,13 +2,18 @@
     "name": "draw/data-tester",
     "description": "Library base on phpunit to test your data with a fluent interface.",
     "type": "library",
+    "keywords": ["draw", "test", "phpunit"],
     "license": "MIT",
     "authors": [
         {
             "name": "Martin Poirier Theoret",
-            "email": "mpoiriert@gmail.com"
+            "email": "mpoiriert@gmail.com",
+            "role": "Developer"
         }
     ],
+    "support": {
+      "docs": "http://php-data-tester.readthedocs.io"
+    },
     "autoload": {
         "psr-4": {
             "Draw\\DataTester\\": "src"
