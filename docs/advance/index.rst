@@ -9,4 +9,3 @@ Here is a list of advance examples that you can follow to make your test more ef
    optional-path
    transform
    reusable-test-callable
-   asserts

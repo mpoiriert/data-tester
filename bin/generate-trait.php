@@ -77,12 +77,14 @@ foreach($methods as $methodName => $information) {
     $correctedDocComment = implode("\n", $docCommentLines);
 
     $class .= "
+//example-start: {$methodName}    
     {$correctedDocComment}    
     public function {$methodName}({$parametersString}) {
         Assert::{$methodName}({$callParametersString});
         
         return \$this;
     }    
+//example-end: {$methodName}  
 ";
 }
 
