@@ -1,7 +1,4 @@
-Php Data Tester
-===============
-
-.. image:: https://travis-ci.org/mpoiriert/php-data-tester.svg?branch=master
+.. include:: ../README.rst
 
 .. toctree::
    :maxdepth: 1
