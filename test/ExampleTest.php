@@ -2,6 +2,7 @@
 //example-start: TestClass
 namespace Your\Project\Name;
 
+use Draw\DataTester\AssertionBuilder;
 use PHPUnit\Framework\TestCase;
 use Draw\DataTester\Tester;
 
@@ -225,6 +226,14 @@ class ExampleTest extends TestCase
         (new Tester($users))
             ->each(new UserDataTester());
         //example-end: EachWithClassCallableEach
+    }
+
+    public function testWithAssertionBuilder()
+    {
+        //example-start: WithAssertionBuilder
+        (new Tester((object)["level1" => (object)["level2" => "value"]]))
+            ->path('level1.level2', (new AssertionBuilder())->assertSame('value'));
+        //example-end: WithAssertionBuilder
     }
 }
 
