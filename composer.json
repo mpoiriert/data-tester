@@ -7,8 +7,7 @@
     "authors": [
         {
             "name": "Martin Poirier Theoret",
-            "email": "mpoiriert@gmail.com",
-            "role": "Developer"
+            "email": "mpoiriert@gmail.com"
         }
     ],
     "support": {
@@ -16,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Draw\\DataTester\\": "src"
+            "Draw\\DataTester\\": "src//"
         }
     },
     "minimum-stability": "dev",
